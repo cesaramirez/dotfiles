@@ -48,6 +48,5 @@ ln -s $HOME/.dotfiles/.mackup.cfg $HOME/.mackup.cfg
 # You need to add brew to your PATH using
 export PATH="/opt/homebrew/bin:$PATH"
 
-# Set macOS preferences
-# We will run this last because this will reload the shell
+# Set macOS preferences - we will run this last because this will reload the shell
 source .macos
