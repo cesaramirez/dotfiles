@@ -53,6 +53,13 @@ cask 'vlc'
 cask 'zoom'
 cask 'dbngin'
 cask 'warp'
+cask 'linear-linear'
+cask 'raindropio'
+cask 'spotify'
+cask 'fig'
+cask 'kindle'
+cask 'todoist'
+cask 'setapp'
 
 # Fonts
 cask 'font-lato'
@@ -66,3 +73,8 @@ cask 'font-cascadia-code'
 cask 'font-cascadia-code-pl'
 cask 'font-cascadia-mono'
 cask 'font-cascadia-mono-pl'
+
+# Mac App Store
+mas 'Amphetamine', id: 937984704
+mas 'SpeedtestByOokla', id: 1153157709
+mas: 'TestFlight', id: 899247664
