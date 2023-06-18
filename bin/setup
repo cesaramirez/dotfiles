@@ -2,8 +2,8 @@
 
 echo "Setting up test project..."
 
-if [[ $PWD != "$HOME/Sites" ]]; then
-    echo "You can only setup projects in the $HOME/Sites directory."
+if [[ $PWD != "$HOME/Development" ]]; then
+    echo "You can only setup projects in the $HOME/Development directory."
 
     exit 1
 fi
