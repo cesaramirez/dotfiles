@@ -29,20 +29,20 @@ brew bundle --file ./Brewfile
 # Set default MySQL root password and auth type
 mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
 
-# Install PHP extensions with PECL
-pecl install imagick redis swoole
+# Create a projects directories
+mkdir $HOME/Developer
+mkdir $HOME/Herd
 
-# Install global Composer packages
-/usr/local/bin/composer global require laravel/installer laravel/valet beyondcode/expose
+# Create Code subdirectories
+mkdir $HOME/Developer/Kods
+mkdir $HOME/Developer/Labs
+mkdir $HOME/Developer/Learn
 
-# Install Laravel Valet
-$HOME/.composer/vendor/bin/valet install
-
-# Create a Development directory
-mkdir $HOME/Development
+# Clone Github repositories
+./clone.sh
 
 # Symlink the Mackup config file to the home directory
-ln -s .mackup.cfg $HOME/.mackup.cfg
+ln -s ./.mackup.cfg $HOME/.mackup.cfg
 
 # Set macOS preferences - we will run this last because this will reload the shell
 source ./.macos
