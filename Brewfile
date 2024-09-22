@@ -46,7 +46,7 @@ cask 'setapp'
 cask 'jetbrains-toolbox'
 cask 'microsoft-edge'
 cask 'dotnet'
-cask: 'chatgpt'
+cask 'chatgpt'
 
 # Fonts
 cask 'font-lato'
@@ -62,7 +62,7 @@ cask 'font-cascadia-mono'
 cask 'font-cascadia-mono-pl'
 
 # Mac App Store
-mas 'Amphetamine', id: 937984704
+mas: 'Amphetamine', id: 937984704
 mas: 'TestFlight', id: 899247664
 mas: 'Microsoft Word'. id: 462054704
 mas: 'Microsoft Excel'. id: 462058435
