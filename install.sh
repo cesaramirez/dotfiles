@@ -6,12 +6,12 @@ echo "Setting up your Mac..."
 touch $HOME/.hushlogin
 
 # Check for Oh My Zsh and install if we don't have it
-if test ! $(which omz); then
+if ! command -v omz >/dev/null 2>&1; then
   /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 fi
 
 # Check for Homebrew and install if we don't have it
-if test ! $(which brew); then
+if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
