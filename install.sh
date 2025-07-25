@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 echo "Setting up your Mac..."
 
@@ -39,7 +40,7 @@ $HOME/.composer/vendor/bin/valet install
 
 # Create a Development directory
 # This is a default directory for macOS user accounts but doesn't comes pre-installed
-mkdir $HOME/Development
+mkdir -p "$HOME/Development"
 
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
 rm -rf $HOME/.zshrc

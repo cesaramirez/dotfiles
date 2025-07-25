@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 echo "Setting up your Mac..."
 
@@ -30,13 +31,13 @@ brew bundle --file ./Brewfile
 mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
 
 # Create a projects directories
-mkdir $HOME/Developer
-mkdir $HOME/Herd
+mkdir -p "$HOME/Developer"
+mkdir -p "$HOME/Herd"
 
 # Create Code subdirectories
-mkdir $HOME/Developer/Kods
-mkdir $HOME/Developer/Labs
-mkdir $HOME/Developer/Learn
+mkdir -p "$HOME/Developer/Kods"
+mkdir -p "$HOME/Developer/Labs"
+mkdir -p "$HOME/Developer/Learn"
 
 # Clone Github repositories
 ./clone.sh

@@ -1,8 +1,9 @@
 #!/bin/bash
+set -e
 
 echo "Setting up test project..."
 
-if [[ $PWD != "$HOME/Development" ]]; then
+if [[ "$PWD" != "$HOME/Development" ]]; then
     echo "You can only setup projects in the $HOME/Development directory."
 
     exit 1
@@ -14,8 +15,9 @@ if [ -z "$REPOSITORY" ] || [ -z "$DIRECTORY" ]; then
     exit 1
 fi
 
-git clone $REPOSITORY $DIRECTORY
-cd $DIRECTORY
+mkdir -p "$(dirname "$DIRECTORY")"
+git clone "$REPOSITORY" "$DIRECTORY"
+cd "$DIRECTORY"
 
 cp .env.example .env
 sed -i '' 's/DB_DATABASE=.*/DB_DATABASE=laravel/' .env
@@ -29,4 +31,4 @@ php artisan migrate:fresh --seed
 npm install
 npm run dev
 
-open -a "/Applications/Visual Studio Code.app" "`pwd`"
+open -a "/Applications/Visual Studio Code.app" "$(pwd)"
