@@ -67,10 +67,10 @@ cask 'font-cascadia-mono'
 cask 'font-cascadia-mono-pl'
 
 # Mac App Store
-mas: 'Amphetamine', id: 937984704
-mas: 'TestFlight', id: 899247664
-mas: 'Microsoft Word'. id: 462054704
-mas: 'Microsoft Excel'. id: 462058435
-mas: 'WhatsApp Messenger'. id: 310633997
-mas: 'GoodLinks'. id: 1474335294
-mas: 'Trello'. id: 1278508951
+mas 'Amphetamine', id: 937984704
+mas 'TestFlight', id: 899247664
+mas 'Microsoft Word', id: 462054704
+mas 'Microsoft Excel', id: 462058435
+mas 'WhatsApp Messenger', id: 310633997
+mas 'GoodLinks', id: 1474335294
+mas 'Trello', id: 1278508951
