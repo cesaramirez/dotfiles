@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+set -e
+
+# Customize these values for your machine
+COMPUTER_NAME="MacBook-Cesar"
+TIMEZONE="America/El_Salvador"
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -15,10 +20,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "MacBook César"
-sudo scutil --set HostName "MacBook César"
-sudo scutil --set LocalHostName "MacBook César"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "MacBook César"
+sudo scutil --set ComputerName "$COMPUTER_NAME"
+sudo scutil --set HostName "$COMPUTER_NAME"
+sudo scutil --set LocalHostName "$COMPUTER_NAME"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$COMPUTER_NAME"
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
@@ -154,7 +159,7 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "America/El_Salvador" > /dev/null
+sudo systemsetup -settimezone "$TIMEZONE" > /dev/null
 
 # Stop iTunes from responding to the keyboard media keys
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
