@@ -42,7 +42,8 @@ alias dtest="dotnet test"
 alias dwatch="dotnet watch run"
 
 # SQL Server
-alias mssql="docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=LaravelWow1986! -p 1433:1433 mcr.microsoft.com/mssql/server:2017-latest"
+# Set MSSQL_SA_PASSWORD in your environment to provide the SA password
+alias mssql="docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=${MSSQL_SA_PASSWORD} -p 1433:1433 mcr.microsoft.com/mssql/server:2017-latest"
 
 # Git
 alias gst="git status"
