@@ -20,6 +20,9 @@ brew 'svn' # Needed to install fonts
 # Development
 brew 'imagemagick'
 brew 'yarn'
+brew 'nvm'
+brew 'pnpm'
+brew 'azure-cli'
 
 # Apps
 cask '1password'
@@ -46,6 +49,8 @@ cask 'setapp'
 cask 'jetbrains-toolbox'
 cask 'microsoft-edge'
 cask 'dotnet'
+cask 'azure-data-studio'
+cask 'powershell'
 cask 'chatgpt'
 
 # Fonts

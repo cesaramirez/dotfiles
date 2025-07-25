@@ -29,9 +29,17 @@ alias php="herd php"
 # JS
 alias nfresh="rm -rf node_modules/ package-lock.json && npm install"
 alias watch="npm run watch"
+alias devjs="npm run dev"
+alias buildjs="npm run build"
 
 # Docker
 alias docker-composer="docker-compose"
+
+# .NET
+alias dbuild="dotnet build"
+alias drun="dotnet run"
+alias dtest="dotnet test"
+alias dwatch="dotnet watch run"
 
 # SQL Server
 alias mssql="docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=LaravelWow1986! -p 1433:1433 mcr.microsoft.com/mssql/server:2017-latest"
