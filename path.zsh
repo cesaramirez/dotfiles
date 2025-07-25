@@ -14,6 +14,9 @@ add_to_path "$HOME/.composer/vendor/bin"
 # Load global Node installed binaries
 add_to_path "$HOME/.node/bin"
 
+# Load .NET tools
+add_to_path "/usr/local/share/dotnet"
+
 # Use project specific binaries before global ones
 add_to_path "vendor/bin"
 add_to_path "node_modules/.bin"
