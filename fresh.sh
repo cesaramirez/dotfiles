@@ -38,9 +38,6 @@ mkdir $HOME/Developer/Kods
 mkdir $HOME/Developer/Labs
 mkdir $HOME/Developer/Learn
 
-# Clone Github repositories
-./clone.sh
-
 # Symlink the Mackup config file to the home directory
 ln -s ./.mackup.cfg $HOME/.mackup.cfg
 
