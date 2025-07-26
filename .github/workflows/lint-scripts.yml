@@ -21,7 +21,7 @@ jobs:
         run: |
           set -euo pipefail
           files=$(git ls-files '*.sh')
-          echo "files=$files" >> "$GITHUB_OUTPUT"
+          echo "files=$files" >> $GITHUB_OUTPUT
       - name: ShellCheck
         if: steps.shell.outputs.files != ''
         run: |
@@ -41,7 +41,7 @@ jobs:
         run: |
           set -euo pipefail
           files=$(git ls-files '*.zsh')
-          echo "files=$files" >> "$GITHUB_OUTPUT"
+          echo "files=$files" >> $GITHUB_OUTPUT
       - name: Zsh syntax check
         if: steps.zsh.outputs.files != ''
         run: |
