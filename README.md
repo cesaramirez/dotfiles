@@ -36,7 +36,7 @@ After backing up your old Mac you may now follow these install instructions to s
     ```
 
 5. Start `Herd.app` and run its install process
-6. Review the `.macos` script and run it (consider `--dry-run` first) to apply system defaults
+6. Review the `.macos` script and run it to apply system defaults
 7. (Optional) If you use **Mackup** and it’s already synced with your cloud storage, restore preferences:
 
         mackup restore
