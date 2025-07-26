@@ -26,6 +26,7 @@ brew "mise"           # one runtime manager (node/python/etc.)
 brew "direnv"         # per-project environment variables
 brew "pre-commit"     # lightweight quality gates per repo
 brew "tldr"           # command cheatsheets
+brew "just"           # command runner for tasks
 
 # --- Optional GNU utils (enable only if you need them) ---
 # brew "coreutils"

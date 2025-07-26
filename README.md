@@ -92,6 +92,19 @@ mise use -g node@20 pnpm@9 python@3.12
 ```
 
 Use `mise install` whenever you update the versions in `.mise.toml`.
+### Tasks (Just)
+Install [just](https://github.com/casey/just) and run common tasks:
+
+```bash
+just setup      # install dependencies
+just update     # update Homebrew packages
+just lock       # update Brewfile.lock.json
+just bench      # measure shell startup
+just docker-up  # start colima Docker VM
+just docker-down # stop colima
+just verify     # print tool versions
+```
+
 
 ### Optional: Mackup
 If you want to sync app preferences across machines:
