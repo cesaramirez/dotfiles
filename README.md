@@ -29,6 +29,10 @@ After backing up your old Mac you may now follow these install instructions to s
     git clone --recursive git@github.com:cesaramirez/dotfiles.git ~/.dotfiles
     ```
 
+    **Important**: keep the file named `Brewfile` exactly as provided (case
+    sensitive). Renaming it will make `brew bundle` fail with `No Brewfile
+    found`.
+
 4. Run the installation:
 
     ```zsh
