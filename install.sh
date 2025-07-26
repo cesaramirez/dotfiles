@@ -11,6 +11,29 @@ if ! command -v omz >/dev/null 2>&1; then
   /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 fi
 
+# Ensure Xcode Command Line Tools are installed
+if ! xcode-select -p >/dev/null 2>&1; then
+  echo "Installing Xcode Command Line Tools..."
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  clt_label=$(softwareupdate -l 2>/dev/null | awk -F'*' '/\*.*Command Line Tools for Xcode-/{sub(/^ *\*/, "", $2); print $2}' | sort -V | tail -n1)
+  if [ -n "$clt_label" ]; then
+    sudo softwareupdate -i "$clt_label" --verbose
+    sudo rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  else
+    sudo rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    echo "No suitable Command Line Tools update found. Launching GUI installer..."
+    xcode-select --install 2>/dev/null || true
+    echo "Please complete the installation and re-run this script."
+    exit 1
+  fi
+  sudo xcode-select -switch /Library/Developer/CommandLineTools || true
+fi
+
+# Install Rosetta on Apple Silicon
+if [ "$(uname -m)" = "arm64" ]; then
+  /usr/sbin/softwareupdate --install-rosetta --agree-to-license || true
+fi
+
 # Check for Homebrew and install if we don't have it
 if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
