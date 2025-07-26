@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-# Customize these values for your machine
-COMPUTER_NAME="MacBook-Cesar"
-TIMEZONE="America/El_Salvador"
+# Customize via env vars or defaults
+COMPUTER_NAME="${COMPUTER_NAME:-MacBook-Cesar}"
+TIMEZONE="${TIMEZONE:-America/El_Salvador}"
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change

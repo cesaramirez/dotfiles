@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/koalaman/shellcheck
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck
+        files: \.(sh|zsh)$
+  - repo: https://github.com/mvdan/sh
+    rev: v3.7.0
+    hooks:
+      - id: shfmt
+        args: ['-i', '2', '-ci', '-sr']
+  - repo: local
+    hooks:
+      - id: zsh-syntax
+        name: "zsh -n"
+        entry: zsh -n
+        language: system
+        files: \.zsh$
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.17.0
+    hooks:
+      - id: gitleaks
+        args: ["--config=.gitleaks.toml"]

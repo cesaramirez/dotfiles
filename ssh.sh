@@ -20,3 +20,7 @@ else
   printf 'Public key:\n'
   cat "$HOME/.ssh/id_ed25519.pub"
 fi
+
+if command -v gh > /dev/null 2>&1; then
+  gh ssh-key add "$HOME/.ssh/id_ed25519.pub" -t "$(hostname)" || true
+fi
