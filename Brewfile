@@ -1,8 +1,6 @@
 #######################
 # Taps
 #######################
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
 
 #######################
 # Core CLI & DX

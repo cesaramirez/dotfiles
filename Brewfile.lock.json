@@ -1,8 +1,5 @@
 {
-  "taps": [
-    "homebrew/cask",
-    "homebrew/cask-fonts"
-  ],
+  "taps": [],
   "brews": [
     "azure-cli",
     "bat",
