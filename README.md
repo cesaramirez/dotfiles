@@ -1,6 +1,6 @@
 ## A Fresh macOS Setup
 
-These instructions are for setting up new Mac devices. Instead, if you want to get started building your own dotfiles, you can [find those instructions below](#your-own-dotfiles).
+These instructions are for setting up a new Mac using **your own** dotfiles in this repository. If you want to customize further, see “Your Own Dotfiles” below.
 
 ### Backup your data
 
@@ -10,40 +10,43 @@ If you're migrating from an existing Mac, you should first make sure to backup a
 - Did you remember to save all important documents from non-iCloud directories?
 - Did you save all of your work from apps which aren't synced through iCloud?
 - Did you remember to export important data from your local database?
-- Did you update [mackup](https://github.com/lra/mackup) to the latest version and ran `mackup backup`?
+- If you use Mackup and want to keep app preferences in the cloud, make sure it’s up to date and run `mackup backup` (optional).
 
 ### Setting up your Mac
 
 After backing up your old Mac you may now follow these install instructions to setup a new one.
 
 1. Update macOS to the latest version through system preferences
-2. Setup an SSH key by using one of the two following methods  
-   2.1. If you use 1Password, install it with the 1Password [SSH agent](https://developer.1password.com/docs/ssh/get-started/#step-3-turn-on-the-1password-ssh-agent) and sync your SSH keys locally.  
-   2.2. Otherwise [generate a new public and private SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) by running:
-
-   ```zsh
-   curl https://raw.githubusercontent.com/driesvints/dotfiles/HEAD/ssh.sh | sh -s "<your-email-address>"
-   ```
+2. Set up your SSH key:
+   - If you use **1Password**, enable the **1Password SSH agent** and sync your keys locally.
+   - Otherwise, generate a keypair following the official GitHub guide (avoid piping remote scripts).
 
 3. Clone this repo to `~/.dotfiles` with:
 
     ```zsh
-    git clone --recursive git@github.com:driesvints/dotfiles.git ~/.dotfiles
+    git clone --recursive git@github.com:cesaramirez/dotfiles.git ~/.dotfiles
     ```
 
-4. Run the installation with:
+4. Run the installation:
 
     ```zsh
-    cd ~/.dotfiles && ./fresh.sh
+      cd ~/.dotfiles && ./install.sh
+      # If you prefer the legacy flow, you can still use:
+      # cd ~/.dotfiles && ./fresh.sh
     ```
 
 5. Start `Herd.app` and run its install process
-6. After mackup is synced with your cloud storage, restore preferences by running `mackup restore`
+6. (Optional) If you use **Mackup** and it’s already synced with your cloud storage, restore preferences:
+
+        mackup restore
 7. Restart your computer to finalize the process
 
 Your Mac is now ready to use!
 
-> 💡 You can use a different location than `~/.dotfiles` if you want. Make sure you also update the references in the [`.zshrc`](./.zshrc#L2) and [`fresh.sh`](./fresh.sh#L20) files.
+> You can use a different location than `~/.dotfiles` if you want. Make sure you also update the references in your shell config and scripts accordingly.
+### Security note
+Avoid piping remote scripts directly into your shell (`curl … | sh`). Prefer local scripts from this repository or official documentation (e.g., GitHub’s SSH key guide).
+
 
 ### Cleaning your old Mac (optionally)
 
@@ -51,14 +54,19 @@ After you've set up your new Mac you may want to wipe and clean install your old
 
 ## Your Own Dotfiles
 
-**Please note that the instructions below assume you already have set up Oh My Zsh so make sure to first [install Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh#getting-started) before you continue.**
 
-If you want to start with your own dotfiles from this setup, it's pretty easy to do so. First of all you'll need to fork this repo. After that you can tweak it the way you want.
+Please note that this repository is ready to be used as-is. If you want to customize your own dotfiles:
+  * Review `.macos` and adjust settings (you can define `COMPUTER_NAME` and `TIMEZONE` at the top).
+  * Update the `Brewfile` to your needs (use `brew search` to find formulas/casks).
+  * Add or tweak shell aliases in `aliases.zsh` and PATH entries in `path.zsh`.
 
-Go through the [`.macos`](./.macos) file and adjust the settings to your liking. You can find much more settings at [the original script by Mathias Bynens](https://github.com/mathiasbynens/dotfiles/blob/master/.macos) and [Kevin Suttle's macOS Defaults project](https://github.com/kevinSuttle/MacOS-Defaults).
-At the top of that file you can define your `COMPUTER_NAME` and `TIMEZONE` variables so the script configures these values automatically.
+> Tip: This setup does **not** require Oh My Zsh. If you prefer a minimal and fast shell, keep Zsh lean. If you like Oh My Zsh, you can still enable it in your `.zshrc`.
 
-Check out the [`Brewfile`](./Brewfile) file and adjust the apps you want to install for your machine. Use [their search page](https://formulae.brew.sh/cask/) to check if the app you want to install is available.
+Go through:
+- `.macos`: system defaults you want to apply.
+- `Brewfile`: CLI tools and apps to install (run `brew bundle` against it).
+- `aliases.zsh` / `path.zsh`: shell aliases and PATH entries you need.
+- `.zshrc`: your shell configuration (keep it minimal for faster startup).
 
 This repo includes extra tooling for Laravel and .NET development. The `Brewfile` installs packages such as `nvm`, `pnpm`, `azure-cli`, and GUI apps like `azure-data-studio` and `powershell`.
 
@@ -66,13 +74,14 @@ Check out the [`aliases.zsh`](./aliases.zsh) file and add your own aliases. If y
 
 Some useful aliases are already provided, including shortcuts for `npm run dev`, `dotnet build`, and common Git commands.
 
-When installing these dotfiles for the first time you'll need to backup all of your settings with Mackup. Install Mackup and backup your settings with the commands below. Your settings will be synced to iCloud so you can use them to sync between computers and reinstall them when reinstalling your Mac. If you want to save your settings to a different directory or different storage than iCloud, [checkout the documentation](https://github.com/lra/mackup/blob/master/doc/README.md#storage). Also make sure your `.zshrc` file is symlinked from your dotfiles repo to your home directory.
+### Optional: Mackup
+If you want to sync app preferences across machines:
 
-```zsh
+```bash
 brew install mackup
 mackup backup
 ```
-
+See Mackup docs if you prefer a different storage (e.g., non‑iCloud).
 You can tweak the shell theme, the Oh My Zsh settings and much more. Go through the files in this repo and tweak everything to your liking.
 
 Enjoy your own Dotfiles!
