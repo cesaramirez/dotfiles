@@ -1,31 +1,22 @@
-#!/bin/sh
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "Generating a new SSH key for GitHub..."
-
-# Generating a new SSH key
-# https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
-ssh-keygen -t ed25519 -C "$1" -f ~/.ssh/id_ed25519
-
-# Adding your SSH key to the ssh-agent
-# https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
-eval "$(ssh-agent -s)"
-
-mkdir -p ~/.ssh
-touch ~/.ssh/config
-cat >> ~/.ssh/config <<'EOF'
-Host *
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519
-EOF
-
-if ssh-add --help 2>&1 | grep -q -- '--apple-use-keychain'; then
-  ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-else
-  ssh-add -K ~/.ssh/id_ed25519 2>/dev/null || ssh-add ~/.ssh/id_ed25519
+EMAIL="${1:-}"
+if [ -z "$EMAIL" ]; then
+  echo "Usage: $0 <email>" >&2
+  exit 1
 fi
 
-# Adding your SSH key to your GitHub account
-# https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
-echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
+mkdir -p "$HOME/.ssh"
+ssh-keygen -t ed25519 -C "$EMAIL" -f "$HOME/.ssh/id_ed25519"
+
+eval "$(ssh-agent -s)"
+ssh-add "$HOME/.ssh/id_ed25519"
+
+if command -v pbcopy > /dev/null 2>&1; then
+  pbcopy < "$HOME/.ssh/id_ed25519.pub"
+  echo "Public key copied to clipboard."
+else
+  printf 'Public key:\n'
+  cat "$HOME/.ssh/id_ed25519.pub"
+fi
