@@ -1,0 +1,55 @@
+name: Lint Scripts
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install lint tools
+        run: |
+          set -euo pipefail
+          echo '::group::apt-get'
+          sudo apt-get update -y
+          sudo apt-get install -y shellcheck shfmt zsh
+          echo '::endgroup::'
+      - name: List shell files
+        id: shell
+        run: |
+          set -euo pipefail
+          files=$(git ls-files '*.sh')
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: ShellCheck
+        if: steps.shell.outputs.files != ''
+        run: |
+          set -euo pipefail
+          echo '::group::shellcheck'
+          shellcheck ${{ steps.shell.outputs.files }}
+          echo '::endgroup::'
+      - name: shfmt
+        if: steps.shell.outputs.files != ''
+        run: |
+          set -euo pipefail
+          echo '::group::shfmt'
+          shfmt -d -i 2 -ci -sr ${{ steps.shell.outputs.files }}
+          echo '::endgroup::'
+      - name: List zsh files
+        id: zsh
+        run: |
+          set -euo pipefail
+          files=$(git ls-files '*.zsh')
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: Zsh syntax check
+        if: steps.zsh.outputs.files != ''
+        run: |
+          set -euo pipefail
+          echo '::group::zsh -n'
+          zsh -n ${{ steps.zsh.outputs.files }}
+          echo '::endgroup::'

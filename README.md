@@ -1,3 +1,5 @@
+[![Lint Scripts](https://github.com/cesaramirez/dotfiles/actions/workflows/lint-scripts.yml/badge.svg)](https://github.com/cesaramirez/dotfiles/actions/workflows/lint-scripts.yml)
+
 ## A Fresh macOS Setup
 
 These instructions are for setting up a new Mac using **your own** dotfiles in this repository. If you want to customize further, see “Your Own Dotfiles” below.
@@ -117,6 +119,16 @@ See Mackup docs if you prefer a different storage (e.g., non‑iCloud).
 You can tweak the shell theme, the Oh My Zsh settings and much more. Go through the files in this repo and tweak everything to your liking.
 
 Enjoy your own Dotfiles!
+
+## Continuous Integration
+Shell (`*.sh`) files are linted with **ShellCheck** and **shfmt**, while Zsh (`*.zsh`) files are syntax checked using `zsh -n`. Run the same checks locally with:
+
+```bash
+sudo apt-get install shellcheck shfmt zsh
+git ls-files '*.sh' | xargs --no-run-if-empty shellcheck
+git ls-files '*.sh' | xargs --no-run-if-empty shfmt -d -i 2 -ci -sr
+git ls-files '*.zsh' | xargs --no-run-if-empty zsh -n
+```
 
 ## Thanks To...
 
