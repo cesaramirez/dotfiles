@@ -1,21 +1,71 @@
+#######################
 # Taps
-tap 'homebrew/cask-fonts'
-tap 'homebrew/cask-versions'
-tap 'homebrew/bundle'
+#######################
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 
-# Binaries
-brew 'awscli'
-brew 'bash' # Latest Bash version
-brew 'coreutils' # Those that come with macOS are outdated
-brew 'ffmpeg'
-brew 'gh'
-brew 'git'
-brew 'grep'
-brew 'httpie'
-brew 'mackup'
-brew 'mas' # Mac App Store manager
-brew 'pkg-config' # https://github.com/driesvints/dotfiles/issues/20
-brew 'svn' # Needed to install fonts
+#######################
+# Core CLI & DX
+#######################
+brew "git"            # version control
+brew "gh"             # GitHub CLI (PRs, issues, releases)
+brew "git-delta"      # prettier git diffs
+brew "lazygit"        # fast TUI for Git (stage/rebase/conflicts)
+
+brew "ripgrep"        # ultra-fast code search (rg)
+brew "fd"             # modern, fast `find` replacement
+brew "fzf"            # fuzzy finder (files/history)
+brew "bat"            # `cat` with syntax highlight + line numbers
+brew "eza"            # modern `ls` (colors/columns)
+brew "zoxide"         # smart `cd`
+brew "jq"             # JSON in CLI
+brew "yq"             # YAML in CLI
+
+brew "mise"           # one runtime manager (node/python/etc.)
+brew "direnv"         # per-project environment variables
+brew "pre-commit"     # lightweight quality gates per repo
+brew "tldr"           # command cheatsheets
+
+# --- Optional GNU utils (enable only if you need them) ---
+# brew "coreutils"
+# brew "gnu-sed"
+# brew "findutils"
+# brew "openssl@3"
+# brew "pkg-config"    # (OPTIONAL) needed when compiling some native libs
+# brew "httpie"        # (OPTIONAL) nicer UX than curl for APIs
+
+#######################
+# Databases / SQL
+#######################
+brew "pgcli"          # Postgres CLI with autocomplete
+brew "mycli"          # MySQL/MariaDB CLI with autocomplete
+brew "sqlite-utils"   # handy SQLite utilities from CLI
+
+#######################
+# .NET (SDK/runtime)
+#######################
+cask "dotnet-sdk"           # .NET SDK + runtime for building/running .NET apps
+cask "azure-data-studio"    # SQL & data tooling for MS stack
+# cask "powershell"         # (OPTIONAL) PowerShell if you use it regularly
+brew "azure-cli"            # Azure CLI (common with .NET backends)
+
+#######################
+# DevOps / Containers (lightweight)
+#######################
+brew "colima"         # lightweight VM for Docker on Apple Silicon
+brew "docker"         # Docker CLI
+brew "hey"            # quick HTTP micro load testing
+
+# --- Enable only if you actually need them on this machine ---
+# brew "kubectl"
+# brew "k9s"
+# brew "helm"
+# brew "stern"
+# brew "terraform"
+# brew "terragrunt"
+# brew "awscli"
+# brew "google-cloud-sdk"
 
 # Development
 brew 'imagemagick'
@@ -24,53 +74,62 @@ brew 'nvm'
 brew 'pnpm'
 brew 'azure-cli'
 
-# Apps
-cask '1password'
-cask 'raycast'
-cask 'discord'
-cask 'docker'
-cask 'figma'
-cask 'firefox'
-cask 'arc'
-cask 'github'
-cask 'herd'
-cask 'google-chrome'
-cask 'postman'
-cask 'slack'
-cask 'visual-studio-code'
-cask 'the-unarchiver'
-cask 'zoom'
-cask 'dbngin'
-cask 'warp'
-cask 'linear-linear'
-cask 'kindle'
-cask 'todoist'
-cask 'setapp'
-cask 'jetbrains-toolbox'
-cask 'microsoft-edge'
-cask 'dotnet'
-cask 'azure-data-studio'
-cask 'powershell'
-cask 'chatgpt'
+#######################
+# Apps (casks)
+#######################
+# Editors
+cask "visual-studio-code"
+cask "cursor"                 # AI-first alternative (enable if you use it)
+cask "jetbrains-toolbox"      # optional (PHPStorm/WebStorm when needed)
 
-# Fonts
-cask 'font-lato'
-cask 'font-open-sans'
-cask 'font-roboto'
-cask 'font-source-code-pro-for-powerline'
-cask 'font-source-code-pro'
-cask 'font-source-sans-pro'
-cask 'font-source-serif-pro'
-cask 'font-cascadia-code'
-cask 'font-cascadia-code-pl'
-cask 'font-cascadia-mono'
-cask 'font-cascadia-mono-pl'
+# DB & APIs
+cask "dbngin"
+cask "postman"
 
-# Mac App Store
-mas 'Amphetamine', id: 937984704
-mas 'TestFlight', id: 899247664
+# Security & productivity
+cask "1password"
+cask "1password-cli"
+cask "raycast"
+cask "rectangle"
+cask "monitorcontrol"
+cask "the-unarchiver"   # quick extract for many archive formats
+cask "todoist-app"    # Todoist desktop app
+
+# Browsers
+cask "google-chrome"
+
+# Terminal
+cask "warp"
+
+# Team & collaboration
+cask "slack"
+cask "discord"
+cask "linear-linear"
+cask "zoom"
+cask "github"           # GitHub Desktop
+
+# Design
+cask "figma"
+
+# Dev convenience
+cask "herd"             # Laravel Herd (fast local PHP stack)
+cask "setapp"           # Setapp subscription manager
+cask "chatgpt"          # ChatGPT desktop app by OpenAI
+
+#######################
+# Fonts (optional)
+#######################
+cask "font-jetbrains-mono"
+cask "font-fira-code"
+
+#######################
+# Mac App Store (optional)
+#######################
+brew "mas"
+mas "Amphetamine", id: 937984704
+mas "TestFlight",  id: 899247664
+mas "WhatsApp",    id: 310633997
 mas 'Microsoft Word', id: 462054704
 mas 'Microsoft Excel', id: 462058435
-mas 'WhatsApp Messenger', id: 310633997
 mas 'GoodLinks', id: 1474335294
 mas 'Trello', id: 1278508951
