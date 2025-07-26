@@ -68,11 +68,30 @@ Go through:
 - `aliases.zsh` / `path.zsh`: shell aliases and PATH entries you need.
 - `.zshrc`: your shell configuration (keep it minimal for faster startup).
 
-This repo includes extra tooling for Laravel and .NET development. The `Brewfile` installs packages such as `nvm`, `pnpm`, `azure-cli`, and GUI apps like `azure-data-studio` and `powershell`.
+This repo includes extra tooling for Laravel and .NET development. Runtime versions are managed with [mise](https://github.com/jdx/mise). The `Brewfile` still installs utilities such as `azure-cli` and GUI apps like `azure-data-studio` and `powershell`.
 
 Check out the [`aliases.zsh`](./aliases.zsh) file and add your own aliases. If you need to tweak your `$PATH` check out the [`path.zsh`](./path.zsh) file. These files get loaded in because the `$ZSH_CUSTOM` setting points to the `.dotfiles` directory. You can adjust the [`.zshrc`](./.zshrc) file to your liking to tweak your Oh My Zsh setup. More info about how to customize Oh My Zsh can be found [here](https://github.com/robbyrussell/oh-my-zsh/wiki/Customization).
 
 Some useful aliases are already provided, including shortcuts for `npm run dev`, `dotnet build`, and common Git commands.
+
+### Runtimes with mise
+
+The `.mise.toml` file defines the versions of Node, PNPM and Python used:
+
+```toml
+[tools]
+node = "20"
+pnpm = "9"
+python = "3.12"
+```
+
+After running `brew bundle`, install them globally with:
+
+```bash
+mise use -g node@20 pnpm@9 python@3.12
+```
+
+Use `mise install` whenever you update the versions in `.mise.toml`.
 
 ### Optional: Mackup
 If you want to sync app preferences across machines:
