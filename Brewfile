@@ -69,9 +69,6 @@ brew "hey"            # quick HTTP micro load testing
 
 # Development
 brew 'imagemagick'
-brew 'yarn'
-brew 'nvm'
-brew 'pnpm'
 brew 'azure-cli'
 
 #######################

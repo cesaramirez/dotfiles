@@ -26,6 +26,9 @@ brew update
 brew tap homebrew/bundle
 brew bundle
 
+# Install runtime versions with mise (idempotent)
+mise use -g node@20 pnpm@9 python@3.12
+
 # Set default MySQL root password and auth type.
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
   printf "Enter MySQL root password: "
@@ -46,9 +49,23 @@ $HOME/.composer/vendor/bin/valet install
 # This is a default directory for macOS user accounts but doesn't comes pre-installed
 mkdir -p "$HOME/Development"
 
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+# Configure shell and ensure runtime block exists
+# Remove legacy runtime manager init lines
+sed -i '' '/NVM_DIR/d' "$HOME/.zshrc" 2>/dev/null || true
+sed -i '' '/nvm.sh/d' "$HOME/.zshrc" 2>/dev/null || true
+sed -i '' '/pyenv init/d' "$HOME/.zshrc" 2>/dev/null || true
+sed -i '' '/rbenv init/d' "$HOME/.zshrc" 2>/dev/null || true
+
+# Add mise/direnv block if missing
+if ! grep -q "# >>> dotfiles runtime >>>" "$HOME/.zshrc"; then
+  cat <<'EOF' >> "$HOME/.zshrc"
+
+# >>> dotfiles runtime >>>
+eval "$(mise activate zsh)"
+# eval "$(direnv hook zsh)"
+# <<< dotfiles runtime <<<
+EOF
+fi
 
 # Symlink the Mackup config file to the home directory
 ln -s $HOME/.dotfiles/.mackup.cfg $HOME/.mackup.cfg
@@ -58,3 +75,8 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 # Set macOS preferences - we will run this last because this will reload the shell
 source .macos
+
+# Show installed runtime versions
+node -v
+pnpm -v
+python --version
