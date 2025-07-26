@@ -77,6 +77,12 @@ Some useful aliases are already provided, including shortcuts for `npm run dev`,
 
 ### Runtimes with mise
 
+After cloning this repo, trust the runtime configuration:
+
+```bash
+mise trust
+```
+
 The `.mise.toml` file defines the versions of Node, PNPM and Python used:
 
 ```toml
@@ -94,7 +100,7 @@ mise use -g node@20 pnpm@9 python@3.12
 
 Use `mise install` whenever you update the versions in `.mise.toml`.
 ### Tasks (Just)
-Install [just](https://github.com/casey/just) and run common tasks:
+Install [just](https://github.com/casey/just) and run common tasks (`just --list` shows them):
 
 ```bash
 just setup      # install dependencies
@@ -127,6 +133,12 @@ sudo apt-get install shellcheck shfmt zsh
 git ls-files '*.sh' | xargs --no-run-if-empty shellcheck
 git ls-files '*.sh' | xargs --no-run-if-empty shfmt -d -i 2 -ci -sr
 git ls-files '*.zsh' | xargs --no-run-if-empty zsh -n
+```
+
+You can also install local hooks with [pre-commit](https://pre-commit.com):
+
+```bash
+pre-commit install
 ```
 
 ## Thanks To...

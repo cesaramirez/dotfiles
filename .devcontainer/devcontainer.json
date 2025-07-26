@@ -1,0 +1,9 @@
+{
+  "name": "dotfiles",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/homebrew:1": {},
+    "ghcr.io/devcontainers/features/mise:1": {}
+  },
+  "postCreateCommand": "brew bundle --file Brewfile && mise install"
+}

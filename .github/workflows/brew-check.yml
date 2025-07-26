@@ -1,0 +1,9 @@
+name: Brewfile Check
+on: [push, pull_request]
+jobs:
+  brew:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Brew bundle check
+        run: brew bundle --file Brewfile --no-lock --dry-run
