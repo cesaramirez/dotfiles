@@ -33,18 +33,20 @@ After backing up your old Mac you may now follow these install instructions to s
     sensitive). Renaming it will make `brew bundle` fail with `No Brewfile
     found`.
 
-4. Run the installation:
+4. Sign in to the Mac App Store (required for installing apps listed with `mas`)
+
+5. Run the installation:
 
     ```zsh
     cd ~/.dotfiles && ./fresh.sh
     ```
 
-5. Start `Herd.app` and run its install process
-6. Review the `.macos` script and run it to apply system defaults
-7. (Optional) If you use **Mackup** and it’s already synced with your cloud storage, restore preferences:
+6. Start `Herd.app` and run its install process
+7. Review the `.macos` script and run it to apply system defaults
+8. (Optional) If you use **Mackup** and it’s already synced with your cloud storage, restore preferences:
 
         mackup restore
-8. Restart your computer to finalize the process
+9. Restart your computer to finalize the process
 
 Your Mac is now ready to use!
 

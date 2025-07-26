@@ -46,6 +46,15 @@ fi
 
 brew analytics off
 
+# Skip Mac App Store apps if not signed in
+if grep -q '^mas ' "$BREWFILE"; then
+  command -v mas >/dev/null 2>&1 || brew install mas
+  if ! mas account >/dev/null 2>&1; then
+    echo "Skipping Mac App Store apps: not signed in"
+    export HOMEBREW_BUNDLE_MAS_SKIP=1
+  fi
+fi
+
 brew bundle --file "$BREWFILE"
 
 # Install Oh My Zsh locally if absent
