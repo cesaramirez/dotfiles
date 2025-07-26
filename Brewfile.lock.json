@@ -1,6 +1,5 @@
 {
   "taps": [
-    "homebrew/bundle",
     "homebrew/cask",
     "homebrew/cask-fonts"
   ],
