@@ -21,7 +21,7 @@ After backing up your old Mac you may now follow these install instructions to s
 1. Update macOS to the latest version through system preferences
 2. Set up your SSH key:
    - If you use **1Password**, enable the **1Password SSH agent** and sync your keys locally.
-   - Otherwise, generate a keypair following the official GitHub guide (avoid piping remote scripts).
+   - Otherwise, generate a keypair using the [official GitHub guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) or run `./ssh.sh <email>` from this repo.
 
 3. Clone this repo to `~/.dotfiles` with:
 
@@ -32,16 +32,15 @@ After backing up your old Mac you may now follow these install instructions to s
 4. Run the installation:
 
     ```zsh
-      cd ~/.dotfiles && ./install.sh
-      # If you prefer the legacy flow, you can still use:
-      # cd ~/.dotfiles && ./fresh.sh
+    cd ~/.dotfiles && ./fresh.sh
     ```
 
 5. Start `Herd.app` and run its install process
-6. (Optional) If you use **Mackup** and it’s already synced with your cloud storage, restore preferences:
+6. Review the `.macos` script and run it (consider `--dry-run` first) to apply system defaults
+7. (Optional) If you use **Mackup** and it’s already synced with your cloud storage, restore preferences:
 
         mackup restore
-7. Restart your computer to finalize the process
+8. Restart your computer to finalize the process
 
 Your Mac is now ready to use!
 
