@@ -62,11 +62,14 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
 
-ZSH_BLOCK="export ZSH=\"$HOME/.oh-my-zsh\"
-export ZSH_CUSTOM=\"$DOTFILES\"
-[ -f \"$ZSH/oh-my-zsh.sh\" ] && source \"$ZSH/oh-my-zsh.sh\"
-[ -f \"$ZSH_CUSTOM/path.zsh\" ] && source \"$ZSH_CUSTOM/path.zsh\"
-[ -f \"$ZSH_CUSTOM/aliases.zsh\" ] && source \"$ZSH_CUSTOM/aliases.zsh\""
+ZSH_BLOCK=$(cat <<'EOF'
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$DOTFILES"
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
+[ -f "$ZSH_CUSTOM/path.zsh" ] && source "$ZSH_CUSTOM/path.zsh"
+[ -f "$ZSH_CUSTOM/aliases.zsh" ] && source "$ZSH_CUSTOM/aliases.zsh"
+EOF
+)
 
 if ! grep -q "ZSH_CUSTOM=\$DOTFILES" "$HOME/.zshrc" 2> /dev/null; then
   printf '\n%s\n' "$ZSH_BLOCK" >> "$HOME/.zshrc"
