@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+DOTFILES="${DOTFILES:-$(cd "$(dirname "$0")" && pwd)}"
 BREWFILE="$DOTFILES/Brewfile"
+EMAIL="${1:-}"
 
 # Install Xcode Command Line Tools if needed
 if ! xcode-select -p > /dev/null 2>&1; then
@@ -48,8 +49,8 @@ brew analytics off
 
 # Skip Mac App Store apps if not signed in
 if grep -q '^mas ' "$BREWFILE"; then
-  command -v mas >/dev/null 2>&1 || brew install mas
-  if ! mas account >/dev/null 2>&1; then
+  command -v mas > /dev/null 2>&1 || brew install mas
+  if ! mas account > /dev/null 2>&1; then
     echo "Skipping Mac App Store apps: not signed in"
     export HOMEBREW_BUNDLE_MAS_SKIP=1
   fi
@@ -62,7 +63,8 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
 
-ZSH_BLOCK=$(cat <<'EOF'
+ZSH_BLOCK=$(
+  cat << 'EOF'
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$DOTFILES"
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
@@ -106,3 +108,12 @@ command -v git > /dev/null && git --version
 command -v node > /dev/null && node --version
 command -v pnpm > /dev/null && pnpm --version
 command -v python > /dev/null && python --version
+
+# Generate an SSH key if needed
+if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+  if [ -z "$EMAIL" ]; then
+    printf 'Email for SSH key: '
+    read -r EMAIL
+  fi
+  "$DOTFILES/ssh.sh" "$EMAIL"
+fi

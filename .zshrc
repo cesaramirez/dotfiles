@@ -69,7 +69,7 @@ ZSH_THEME="dracula-pro"
 HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$DOTFILES
+export ZSH_CUSTOM=$DOTFILES
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -79,6 +79,8 @@ ZSH_CUSTOM=$DOTFILES
 plugins=(git laravel node npm docker dotnet)
 
 source $ZSH/oh-my-zsh.sh
+[ -f "$ZSH_CUSTOM/path.zsh" ] && source "$ZSH_CUSTOM/path.zsh"
+[ -f "$ZSH_CUSTOM/aliases.zsh" ] && source "$ZSH_CUSTOM/aliases.zsh"
 
 # User configuration
 
