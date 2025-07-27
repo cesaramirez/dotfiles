@@ -44,7 +44,7 @@ brew "sqlite-utils"   # handy SQLite utilities from CLI
 # .NET (SDK/runtime)
 #######################
 cask "dotnet-sdk"           # .NET SDK + runtime for building/running .NET apps
-cask "azure-data-studio"    # SQL & data tooling for MS stack
+# cask "azure-data-studio"    # SQL & data tooling for MS stack
 # cask "powershell"         # (OPTIONAL) PowerShell if you use it regularly
 brew "azure-cli"            # Azure CLI (common with .NET backends)
 
