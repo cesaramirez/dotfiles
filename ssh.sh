@@ -1,26 +1,41 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EMAIL="${1:-}"
-if [ -z "$EMAIL" ]; then
-  echo "Usage: $0 <email>" >&2
-  exit 1
+labels=( P k n E )
+
+# Ensure SSH agent is running
+if ! ssh-add -l >/dev/null 2>&1; then
+  eval "$(ssh-agent -s)" >/dev/null
 fi
 
 mkdir -p "$HOME/.ssh"
-ssh-keygen -t ed25519 -C "$EMAIL" -f "$HOME/.ssh/id_ed25519"
 
-eval "$(ssh-agent -s)"
-ssh-add "$HOME/.ssh/id_ed25519"
+config_file="$HOME/.ssh/config"
+[ -f "$config_file" ] || touch "$config_file"
 
-if command -v pbcopy > /dev/null 2>&1; then
-  pbcopy < "$HOME/.ssh/id_ed25519.pub"
-  echo "Public key copied to clipboard."
-else
-  printf 'Public key:\n'
-  cat "$HOME/.ssh/id_ed25519.pub"
-fi
+for label in "${labels[@]}"; do
+  read -p "Correo para la cuenta ${label}: " email
+  keyfile="$HOME/.ssh/id_${label}"
+  if [ ! -f "$keyfile" ]; then
+    ssh-keygen -t ed25519 -C "$email" -f "$keyfile" -N ""
+  fi
+  chmod 600 "$keyfile" "$keyfile.pub"
+  ssh-add "$keyfile" 2>/dev/null || true
 
-if command -v gh > /dev/null 2>&1; then
-  gh ssh-key add "$HOME/.ssh/id_ed25519.pub" -t "$(hostname)" || true
-fi
+  if ! grep -q "^Host github.com-${label}$" "$config_file"; then
+    {
+      echo "Host github.com-${label}"
+      echo "  HostName github.com"
+      echo "  User git"
+      echo "  IdentityFile ~/.ssh/id_${label}"
+      echo
+    } >> "$config_file"
+  fi
+  chmod 600 "$config_file"
+
+done
+
+echo "Claves públicas generadas:"
+for label in "${labels[@]}"; do
+  echo "  ~/.ssh/id_${label}.pub"
+done
